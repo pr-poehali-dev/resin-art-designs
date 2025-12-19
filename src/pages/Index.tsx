@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const projects = [
     {
@@ -13,27 +16,59 @@ const Index = () => {
       title: 'Стол River',
       category: 'tables',
       image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/8a0e69e4-9697-46a1-ab69-768e4a400a5b.jpg',
-      description: 'Эпоксидный стол с эффектом реки, деревянные края и янтарная смола'
+      description: 'Эпоксидный стол с эффектом реки, деревянные края и янтарная смола',
+      details: 'Размеры: 180×90 см. Массив дуба и прозрачная эпоксидная смола с металлическим пигментом.',
+      price: 'от 45 000 ₽'
     },
     {
       id: 2,
       title: 'Декоративная панель',
       category: 'panels',
       image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/e48242f4-641a-4a69-99cb-ef9e4811fc55.jpg',
-      description: 'Настенная панель с абстрактными узорами из смолы и золотыми акцентами'
+      description: 'Настенная панель с абстрактными узорами из смолы и золотыми акцентами',
+      details: 'Размеры: 120×80 см. Эпоксидная смола с добавлением золотой фольги и натуральных пигментов.',
+      price: 'от 28 000 ₽'
     },
     {
       id: 3,
       title: 'Набор подставок',
       category: 'coasters',
       image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/d874fbe5-d324-420d-a9a7-6bf09c83ce80.jpg',
-      description: 'Элегантные подставки с мраморным эффектом и золотыми вкраплениями'
+      description: 'Элегантные подставки с мраморным эффектом и золотыми вкраплениями',
+      details: 'Набор из 4 подставок. Диаметр: 10 см. Защитное покрытие от влаги.',
+      price: 'от 3 500 ₽'
     }
   ];
 
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
     : projects.filter(p => p.category === selectedCategory);
+
+  const openLightbox = (id: number) => {
+    setSelectedImage(id);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setTimeout(() => setSelectedImage(null), 300);
+  };
+
+  const navigateImage = (direction: 'prev' | 'next') => {
+    if (selectedImage === null) return;
+    const currentIndex = filteredProjects.findIndex(p => p.id === selectedImage);
+    let newIndex;
+    
+    if (direction === 'next') {
+      newIndex = (currentIndex + 1) % filteredProjects.length;
+    } else {
+      newIndex = (currentIndex - 1 + filteredProjects.length) % filteredProjects.length;
+    }
+    
+    setSelectedImage(filteredProjects[newIndex].id);
+  };
+
+  const currentProject = projects.find(p => p.id === selectedImage);
 
   return (
     <div className="min-h-screen bg-background">
@@ -84,25 +119,120 @@ const Index = () => {
             {filteredProjects.map((project, index) => (
               <Card 
                 key={project.id} 
-                className="overflow-hidden hover:scale-105 transition-transform duration-300 animate-fade-in"
+                className="group overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 animate-fade-in border-border/50 hover:border-primary/50"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => openLightbox(project.id)}
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="relative aspect-square overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <div className="flex items-center gap-2 text-primary mb-2">
+                        <Icon name="Eye" size={18} />
+                        <span className="text-sm font-medium">Посмотреть детали</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{project.price}</p>
+                    </div>
+                  </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground">{project.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm">{project.description}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
+
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-6xl w-full p-0 border-0 bg-transparent overflow-hidden">
+          <DialogTitle className="sr-only">
+            {currentProject?.title}
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            {currentProject?.description}
+          </DialogDescription>
+          <div className="relative bg-background/95 backdrop-blur-xl rounded-lg overflow-hidden animate-scale-in">
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/80 hover:bg-background transition-colors"
+            >
+              <Icon name="X" size={24} />
+            </button>
+
+            <div className="grid md:grid-cols-2 gap-0">
+              <div className="relative aspect-square md:aspect-auto">
+                <img
+                  src={currentProject?.image}
+                  alt={currentProject?.title}
+                  className="w-full h-full object-cover"
+                />
+                
+                <div className="absolute inset-y-0 left-0 flex items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigateImage('prev');
+                    }}
+                    className="m-4 p-3 rounded-full bg-background/80 hover:bg-background backdrop-blur-sm transition-colors"
+                  >
+                    <Icon name="ChevronLeft" size={24} />
+                  </button>
+                </div>
+
+                <div className="absolute inset-y-0 right-0 flex items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigateImage('next');
+                    }}
+                    className="m-4 p-3 rounded-full bg-background/80 hover:bg-background backdrop-blur-sm transition-colors"
+                  >
+                    <Icon name="ChevronRight" size={24} />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-8 md:p-12 flex flex-col justify-center space-y-6">
+                <div>
+                  <h3 className="text-3xl font-bold mb-2">{currentProject?.title}</h3>
+                  <p className="text-muted-foreground">{currentProject?.description}</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Icon name="Info" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-medium mb-1">Детали изделия</p>
+                      <p className="text-sm text-muted-foreground">{currentProject?.details}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <Icon name="Tag" className="text-primary mt-1" size={20} />
+                    <div>
+                      <p className="font-medium mb-1">Стоимость</p>
+                      <p className="text-sm text-muted-foreground">{currentProject?.price}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button size="lg" className="w-full">
+                    <Icon name="Mail" className="mr-2" size={20} />
+                    Заказать такое же
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <section id="about" className="py-20 px-6">
         <div className="container mx-auto max-w-4xl">
