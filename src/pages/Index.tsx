@@ -255,10 +255,15 @@ const Index = () => {
       </Dialog>
 
       <section id="about" className="py-20 px-6">
-        <div className="container mx-auto max-w-4xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl font-bold text-center mb-16">О мастерах</h2>
+          
+          <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold">О мастере</h2>
+              <div className="relative h-64 rounded-lg overflow-hidden mb-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm"></div>
+              </div>
+              <h3 className="text-2xl font-bold">Мастер по работе со смолой</h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 Более 5 лет создаю уникальные предметы интерьера из эпоксидной смолы. 
                 Каждое изделие — это результат тщательной работы и внимания к деталям.
@@ -278,8 +283,30 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm"></div>
+
+            <div className="space-y-6">
+              <div className="relative h-64 rounded-lg overflow-hidden mb-6">
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 backdrop-blur-sm"></div>
+              </div>
+              <h3 className="text-2xl font-bold">Мастер вязания и керамики</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Занимаюсь рукоделием более 7 лет. Специализируюсь на вязаных изделиях из натуральной пряжи 
+                и создании авторской керамики. Каждая работа наполнена теплом и заботой.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Вдохновляюсь скандинавским минимализмом и природными текстурами. 
+                Создаю уютные вещи, которые дарят комфорт и делают дом по-настоящему живым.
+              </p>
+              <div className="flex gap-4 pt-4">
+                <div className="flex items-center gap-2">
+                  <Icon name="Award" className="text-primary" size={24} />
+                  <span className="font-semibold">7+ лет опыта</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Heart" className="text-primary" size={24} />
+                  <span className="font-semibold">150+ изделий</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
