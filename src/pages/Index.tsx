@@ -263,7 +263,7 @@ const Index = () => {
               <div className="relative h-64 rounded-lg overflow-hidden mb-6">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm"></div>
               </div>
-              <h3 className="text-2xl font-bold">Мастер по работе со смолой</h3>
+              <h3 className="text-2xl font-bold">Андрей — Мастер по работе со смолой</h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 Более 5 лет создаю уникальные предметы интерьера из эпоксидной смолы. 
                 Каждое изделие — это результат тщательной работы и внимания к деталям.
@@ -288,7 +288,7 @@ const Index = () => {
               <div className="relative h-64 rounded-lg overflow-hidden mb-6">
                 <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 backdrop-blur-sm"></div>
               </div>
-              <h3 className="text-2xl font-bold">Мастер вязания и керамики</h3>
+              <h3 className="text-2xl font-bold">Ольга — Мастер вязания и керамики</h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 Занимаюсь рукоделием более 7 лет. Специализируюсь на вязаных изделиях из натуральной пряжи 
                 и создании авторской керамики. Каждая работа наполнена теплом и заботой.
