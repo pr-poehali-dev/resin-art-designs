@@ -108,7 +108,7 @@ const Index = () => {
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Изделия из смолы,<br />созданные с душой
+            Проект Создания Волшебства
           </h2>
           <p className="text-xl text-muted-foreground mb-8 animate-fade-in">
             Уникальные предметы интерьера, которые преображают пространство
