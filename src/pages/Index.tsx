@@ -22,12 +22,12 @@ const Index = () => {
     },
     {
       id: 2,
-      title: 'Декоративная панель',
-      category: 'panels',
-      image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/e48242f4-641a-4a69-99cb-ef9e4811fc55.jpg',
-      description: 'Настенная панель с абстрактными узорами из смолы и золотыми акцентами',
-      details: 'Размеры: 120×80 см. Эпоксидная смола с добавлением золотой фольги и натуральных пигментов.',
-      price: 'от 28 000 ₽'
+      title: 'Часы из эпоксидной смолы',
+      category: 'clocks',
+      image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/db482a87-1d1d-44ad-aad3-63a5509d4035.jpg',
+      description: 'Настенные часы с янтарной смолой, древесным срезом и золотыми вкраплениями',
+      details: 'Диаметр: 35 см. Массив дерева, эпоксидная смола с металлическими пигментами. Бесшумный механизм.',
+      price: 'от 8 500 ₽'
     },
     {
       id: 3,
@@ -110,7 +110,7 @@ const Index = () => {
             <TabsList className="grid w-full max-w-md mx-auto grid-cols-4 bg-muted">
               <TabsTrigger value="all" onClick={() => setSelectedCategory('all')}>Все</TabsTrigger>
               <TabsTrigger value="tables" onClick={() => setSelectedCategory('tables')}>Столы</TabsTrigger>
-              <TabsTrigger value="panels" onClick={() => setSelectedCategory('panels')}>Панели</TabsTrigger>
+              <TabsTrigger value="clocks" onClick={() => setSelectedCategory('clocks')}>Часы</TabsTrigger>
               <TabsTrigger value="coasters" onClick={() => setSelectedCategory('coasters')}>Подставки</TabsTrigger>
             </TabsList>
           </Tabs>
