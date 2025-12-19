@@ -46,6 +46,15 @@ const Index = () => {
       description: 'Уютные вязаные изделия ручной работы: свитера, пледы, игрушки и аксессуары',
       details: 'Индивидуальный подбор пряжи, размеров и цветовой гаммы. Натуральные материалы.',
       price: 'от 2 500 ₽'
+    },
+    {
+      id: 5,
+      title: 'Эксклюзивные горшки для растений',
+      category: 'pots',
+      image: 'https://cdn.poehali.dev/projects/b36eeb0d-1e82-41ad-b9f9-74898f02ef21/files/c3d15778-f2d8-4ec5-b7bc-2cc6ac27fbf1.jpg',
+      description: 'Дизайнерские горшки ручной работы: керамика, бетон, авторская роспись',
+      details: 'Размеры от 10 до 40 см. Керамика с глазурью, минималистичный бетон, геометрические узоры.',
+      price: 'от 1 800 ₽'
     }
   ];
 
@@ -116,12 +125,13 @@ const Index = () => {
           <h2 className="text-4xl font-bold text-center mb-12">Галерея работ</h2>
           
           <Tabs defaultValue="all" className="w-full mb-12">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-5 bg-muted">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-6 bg-muted">
               <TabsTrigger value="all" onClick={() => setSelectedCategory('all')}>Все</TabsTrigger>
               <TabsTrigger value="tables" onClick={() => setSelectedCategory('tables')}>Столы</TabsTrigger>
               <TabsTrigger value="clocks" onClick={() => setSelectedCategory('clocks')}>Часы</TabsTrigger>
               <TabsTrigger value="coasters" onClick={() => setSelectedCategory('coasters')}>Подставки</TabsTrigger>
               <TabsTrigger value="knitted" onClick={() => setSelectedCategory('knitted')}>Вязание</TabsTrigger>
+              <TabsTrigger value="pots" onClick={() => setSelectedCategory('pots')}>Горшки</TabsTrigger>
             </TabsList>
           </Tabs>
 
